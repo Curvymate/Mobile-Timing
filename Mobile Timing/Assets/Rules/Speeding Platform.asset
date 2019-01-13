@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: Speeding Platform
+  m_EditorClassIdentifier: Assembly-CSharp::Rule
+  objectType: 0
+  platform: {fileID: 3425632756586349418, guid: 0a88328a2497b8344a2119bb15c4190e,
+    type: 3}
+  link:
+  - {fileID: 11400000}
+  - {fileID: 11400000, guid: 37b47d27ac8788e4ab711cc95abad947, type: 2}
+  - {fileID: 11400000, guid: 78eb1d5719a5b7a429ffce3d1eec226a, type: 2}
+  spacing:
+    min: {x: 5, y: -15}
+    max: {x: 8, y: 3}

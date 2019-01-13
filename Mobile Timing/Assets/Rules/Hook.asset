@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: Hook
+  m_EditorClassIdentifier: Assembly-CSharp::Rule
+  objectType: 2
+  platform: {fileID: 4978837502644466984, guid: b52d73b854c8a254da6bec61f23df8d8,
+    type: 3}
+  link:
+  - {fileID: 11400000, guid: 1546e677492302c47ba6370ee9f1eb12, type: 2}
+  - {fileID: 11400000, guid: 37b47d27ac8788e4ab711cc95abad947, type: 2}
+  spacing:
+    min: {x: 5, y: 5}
+    max: {x: 8, y: 10}
