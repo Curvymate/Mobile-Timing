@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Normal Platform
   m_EditorClassIdentifier: 
   objectType: 0
-  platform: {fileID: 1130166504143969234, guid: 602611b6dbd65604593ae5481173b5a9,
-    type: 3}
+  sObject: {fileID: 1130166504143969234, guid: 602611b6dbd65604593ae5481173b5a9, type: 3}
   link:
   - {fileID: 11400000, guid: 8c1e096601e1a174eb41304276e33b7d, type: 2}
   - {fileID: 11400000}

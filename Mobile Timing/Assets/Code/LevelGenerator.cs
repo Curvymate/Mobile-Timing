@@ -64,7 +64,7 @@ public class LevelGenerator : MonoBehaviour
             
         spawnedObject = Instantiate(_object, pos, Quaternion.identity);
 
-        spawnedObject.Init(Player.instance.movement, Player.instance);
+        spawnedObject.Init(Player.instance.movement);
 
         previousObject = spawnedObject;
     }

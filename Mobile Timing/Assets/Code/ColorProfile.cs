@@ -1,11 +1,6 @@
 ﻿using UnityEngine;
 using System;
 
-public interface IColor
-{
-    Color color { get; }
-}
-
 [Serializable]
 public struct PlatformColor
 {

@@ -30,9 +30,9 @@ public class Hook : SObject
         return ret;
     }
 
-    public override void Init(Movement target, IColor targetColorProfile)
+    public override void Init(Movement target)
     {
-        base.Init(target, targetColorProfile);
+        base.Init(target);
         activeHooks.Add(this);
     }
 

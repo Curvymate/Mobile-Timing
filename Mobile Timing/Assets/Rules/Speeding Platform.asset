@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Speeding Platform
   m_EditorClassIdentifier: 
   objectType: 0
-  platform: {fileID: 4347006945409925326, guid: 0a88328a2497b8344a2119bb15c4190e,
-    type: 3}
+  sObject: {fileID: 4347006945409925326, guid: 0a88328a2497b8344a2119bb15c4190e, type: 3}
   link:
   - {fileID: 11400000, guid: f5f747fba4e818a41b0750f16fbb0215, type: 2}
   - {fileID: 11400000}

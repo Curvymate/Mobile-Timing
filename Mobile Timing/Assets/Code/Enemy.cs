@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : SObject, IColor
+public class Enemy : SObject
 {
     public static List<Enemy> activeEnemies = new List<Enemy>();
     public static Enemy ClosestEnemy(Vector2 position)
@@ -34,9 +34,9 @@ public class Enemy : SObject, IColor
         activeEnemies.Add(this);
     }
 
-    public override void Init(Movement target, IColor targetColorProfile)
+    public override void Init(Movement target)
     {
-        base.Init(target, targetColorProfile);
+        base.Init(target);
 
         _color = Utility.GetRandomColor();
     }

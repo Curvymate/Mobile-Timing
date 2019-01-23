@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Launcher
   m_EditorClassIdentifier: 
   objectType: 1
-  platform: {fileID: 7674374053810211053, guid: b7d2a3f42d3a7c940b2484335a1daca9,
-    type: 3}
+  sObject: {fileID: 7674374053810211053, guid: b7d2a3f42d3a7c940b2484335a1daca9, type: 3}
   link:
   - {fileID: 11400000, guid: f8d10a3662923fd4f9dd56aac14fbead, type: 2}
   spacing:

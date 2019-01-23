@@ -7,6 +7,12 @@ public class Launcher : SObject
 
     private void Launch()
     {
+        Vector2 newVelocity;
+        newVelocity.x = _targetMovement.CurrentVelocity.x;
+        newVelocity.y = 0;
+
+        _targetMovement.ChangeVelocity(newVelocity);
+
         _targetMovement.AddForce(Vector2.up * verticalForce);
     }
 

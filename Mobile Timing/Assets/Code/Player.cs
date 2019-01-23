@@ -2,15 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : Entity, IColor
+public class Player : Entity
 {
     public static Player instance;
 
-    // Private:
-
-    // Color Profile.
+    // Public:
     public Color color { get { return _color; } }
+    public SpeedingPlatform currentSpeedingPlatform { get { return _currentSpeedingPlatform; } set { _currentSpeedingPlatform = value; } }
+
+    // Private:
+    // Color Profile.
     private Color _color;
+
+    // Speeding.
+    private SpeedingPlatform _currentSpeedingPlatform;
+    private bool _speed = false;
 
     // Grappeling.
     [Header("Grappel")]
@@ -37,6 +43,7 @@ public class Player : Entity, IColor
     private new void Update()
     {
         base.Update();
+        Accelerate();
 
         if (Input.GetKeyDown(KeyCode.Space))
             Grappel();
@@ -45,6 +52,19 @@ public class Player : Entity, IColor
     private void Init()
     {
         _movement.ChangeVelocity(Vector2.right * _movement.MinSpeed);
+    }
+
+    private void Accelerate()
+    {
+        if (_currentSpeedingPlatform == null)
+        {
+            _speed = false;
+        }
+
+        if (_speed)
+            _movement.ToggleAcceleration(true);
+        else
+            _movement.ToggleAcceleration(false);
     }
 
     private void Grappel()
@@ -76,5 +96,16 @@ public class Player : Entity, IColor
             color = 3;
 
         _color = (Color)color;
+
+        if (_currentSpeedingPlatform != null)
+        {
+            if (_color == _currentSpeedingPlatform.currentColorProfile.color)
+                _speed = true;
+            else
+            {
+                Debug.Log("Player zapped ;(");
+                _speed = false;
+            }
+        }
     }
 }

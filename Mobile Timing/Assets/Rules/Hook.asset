@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Hook
   m_EditorClassIdentifier: 
   objectType: 2
-  platform: {fileID: 8627103971989218404, guid: b52d73b854c8a254da6bec61f23df8d8,
-    type: 3}
+  sObject: {fileID: 8627103971989218404, guid: b52d73b854c8a254da6bec61f23df8d8, type: 3}
   link:
   - {fileID: 11400000, guid: f5f747fba4e818a41b0750f16fbb0215, type: 2}
   - {fileID: 11400000, guid: 8c1e096601e1a174eb41304276e33b7d, type: 2}
