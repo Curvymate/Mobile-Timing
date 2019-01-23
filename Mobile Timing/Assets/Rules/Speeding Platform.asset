@@ -9,16 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: f74c963037a4d444197afab3991907c3, type: 3}
   m_Name: Speeding Platform
-  m_EditorClassIdentifier: Assembly-CSharp::Rule
+  m_EditorClassIdentifier: 
   objectType: 0
-  platform: {fileID: 3425632756586349418, guid: 0a88328a2497b8344a2119bb15c4190e,
+  platform: {fileID: 4347006945409925326, guid: 0a88328a2497b8344a2119bb15c4190e,
     type: 3}
   link:
+  - {fileID: 11400000, guid: f5f747fba4e818a41b0750f16fbb0215, type: 2}
   - {fileID: 11400000}
-  - {fileID: 11400000, guid: 37b47d27ac8788e4ab711cc95abad947, type: 2}
-  - {fileID: 11400000, guid: 78eb1d5719a5b7a429ffce3d1eec226a, type: 2}
+  - {fileID: 11400000, guid: b0d92a46eb593d84ba13ae7dc145e54c, type: 2}
   spacing:
-    min: {x: 5, y: -15}
-    max: {x: 8, y: 3}
+    min: {x: 4, y: -4}
+    max: {x: 6, y: 0}

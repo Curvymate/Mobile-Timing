@@ -1,8 +1,8 @@
 fileFormatVersion: 2
-guid: 2299e002b7e385d40a582370bb43e069
+guid: 457b4dfe7e56a3843a66b914b1c90130
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Speeding Platform_0
+    21300000: 'Speeding Platform #4_0'
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -118,7 +118,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Speeding Platform_0
+      name: 'Speeding Platform #4_0'
       rect:
         serializedVersion: 2
         x: 0
@@ -132,7 +132,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 730f16a4d736390498892a4e1b86bbbf
+      spriteID: 9f1f87881d453d04d97af17e0b1c57ec
       vertices: []
       indices: 
       edges: []
@@ -140,7 +140,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 99ee0ae1d848f1740b3e29c550b801d3
+    spriteID: 9a99c2cc3def8be4692991622f3ce844
     vertices: []
     indices: 
     edges: []

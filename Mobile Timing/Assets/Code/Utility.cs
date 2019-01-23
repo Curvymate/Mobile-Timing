@@ -1,21 +1,19 @@
 ﻿using UnityEngine;
 using System;
 
-[CreateAssetMenu]
-public class Rule : ScriptableObject
-{
-    public ObjectType objectType;
-    public InteractableObstacle platform;
-    public Rule[] link;
-
-    public Range spacing;
-}
-
-public enum ObjectType { PLATFORM, LAUNCHER, HOOK }
-
 [Serializable]
 public class Range
 {
     public Vector2 min;
     public Vector2 max;
+}
+
+public class Utility
+{
+    public static Color GetRandomColor()
+    {
+        Color ret = (Color)UnityEngine.Random.Range(0, Enum.GetValues(typeof(Color)).Length);
+
+        return ret;
+    }
 }

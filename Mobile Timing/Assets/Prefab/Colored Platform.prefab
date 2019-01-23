@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1036673138428171465}
   - component: {fileID: 66260048}
   - component: {fileID: 1036673138428171468}
-  - component: {fileID: 3425632756586349418}
+  - component: {fileID: 4347006945409925326}
   m_Layer: 8
   m_Name: Colored Platform
   m_TagString: Untagged
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 1036673138428171469}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.04, y: -3.95, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -107,7 +107,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5.12, y: 0.54}
   m_EdgeRadius: 0
---- !u!114 &3425632756586349418
+--- !u!114 &4347006945409925326
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -116,6 +116,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1036673138428171469}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 199c278f882277a4188aa01c1db14091, type: 3}
+  m_Script: {fileID: 11500000, guid: 6843f5c520849e64ea5dfed5c835abb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _colorProfiles:
+  - color: 0
+    sprite: {fileID: 21300000, guid: 2299e002b7e385d40a582370bb43e069, type: 3}
+  - color: 2
+    sprite: {fileID: 21300000, guid: 11538b8f59fe8a84c8945c0430e3cced, type: 3}
+  - color: 1
+    sprite: {fileID: 21300000, guid: 8804011577d4d674fa559a7f8fda49bd, type: 3}
+  - color: 3
+    sprite: {fileID: 21300000, guid: 457b4dfe7e56a3843a66b914b1c90130, type: 3}

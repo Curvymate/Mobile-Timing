@@ -2,28 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// Reuseable class for movement with custom acceleration, gravity, friction & ground detection.
-
 [RequireComponent(typeof(Rigidbody2D))]
 public class Movement : MonoBehaviour
 {
      // Public:
-    public bool IsGrounded { get { return isGrounded; } }
+    public float MaxSpeed { get { return maxSpeed; } set { maxSpeed = value; } }
+    public float MinSpeed { get { return minSpeed; } set { minSpeed = value; } }
+    public float Acceleration { get { return acceleration; } set { acceleration = value; } }
+    public float Friction { get { return friction; } set { friction = value; } }
     public Vector2 CurrentVelocity { get { return velocityVector; } }
+    public bool IsGrounded { get { return isGrounded; } }
 
     // Private:
-
-    // These variables will be adjusted through a parent class.
-    private float maxSpeed;
-    private float minSpeed;
-    private float friction;
-    private Vector2 direction;
-
-    // Private values which we'll update the object's velocity with.
+    [SerializeField] private float maxSpeed;
+    [SerializeField] private float minSpeed;
+    [SerializeField] private float acceleration;
+    [SerializeField] private float friction;
     private Vector2 velocityVector;
-    private Vector2 accelerationVector;
-    private Vector2 frictionVector;
-    private Vector2 gravityVector;
+    private bool accelerationToggle = false;
 
     // Values which define the confines of our ground detection.
     [SerializeField] private float groundCheckDist;
@@ -31,6 +27,10 @@ public class Movement : MonoBehaviour
     private RaycastHit2D hit;
     private bool isGrounded = false;
 
+    #region Buffering.
+    private Vector2 bufferedForce;
+    private bool buffer_AddForce = false;
+    #endregion
 
     #region References.
     private Rigidbody2D rb;
@@ -43,114 +43,50 @@ public class Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        GroundCheck();
-
-        Accelerate();
+        DetectGround();
         UpdateVelocity();
     }
 
-    /// <summary>
-    /// Calculate and add acceleration to the velocity based on the acceleration vector.
-    /// </summary>
-    private void Accelerate()
-    {
-        velocityVector += accelerationVector * Time.fixedDeltaTime;
+    float test;
 
-        if (Mathf.Abs(velocityVector.x) > maxSpeed)
-            velocityVector.x = direction.x * maxSpeed;
-    }
-
-    /// <summary>
-    /// A simple ground check which utilizes a raycast.
-    /// </summary>
-    private void GroundCheck()
-    {
-        hit = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDist, groundLayer);
-
-        if (hit)
-            isGrounded = true;
-        else
-            isGrounded = false;
-    }
-
-    /// <summary>
-    /// Update the rigidbody's velocity with our custom values.
-    /// </summary>
     private void UpdateVelocity()
     {
-        frictionVector = -direction * friction;
+        velocityVector = rb.velocity;
 
-        //velocityVector += frictionVector * Time.fixedDeltaTime;
+        if (accelerationToggle && Mathf.Abs(velocityVector.x) < maxSpeed)
+            velocityVector += Vector2.right * acceleration * Time.fixedDeltaTime;
 
-        //if (!isGrounded)
-        //    velocityVector += gravityVector * Time.fixedDeltaTime;
+        if (Mathf.Abs(velocityVector.x) > minSpeed)
+            velocityVector += Vector2.right * (velocityVector.x / -Mathf.Abs(velocityVector.x)) * friction * Time.fixedDeltaTime;
 
+        if (buffer_AddForce)
+        {
+            velocityVector += bufferedForce;
+            buffer_AddForce = false;
+        }
 
-        //if (Mathf.Abs(velocityVector.x) < (minSpeed))
-        //    velocityVector.x = direction.x * minSpeed;
-
-        rb.AddForce(accelerationVector + frictionVector, ForceMode2D.Force);
+        rb.velocity = velocityVector;
     }
 
-    /// <summary>
-    /// Define a max speed for this object.
-    /// </summary>
-    /// <param name="maxSpeed"></param>
-    public void SetMaxSpeed(float maxSpeed)
+    private void DetectGround()
     {
-        this.maxSpeed = maxSpeed;
+        isGrounded = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDist, groundLayer);      
     }
 
-    /// <summary>
-    /// Define an initial velocity and a direction for this object.
-    /// </summary>
-    /// <param name="initialSpeed"></param>
-    /// <param name="direction"></param>
-    public void SetInitialVelocity(float initialSpeed, Vector2 direction)
+    public void ToggleAcceleration(bool toggle)
     {
-        this.minSpeed = initialSpeed;
-        this.direction = direction;
-
-        rb.velocity = direction * initialSpeed;
+        accelerationToggle = toggle;
     }
 
-    /// <summary>
-    /// Define a friction constant for this object.
-    /// </summary>
-    /// <param name="friction"></param>
-    public void SetFriction(float friction)
+    public void ChangeVelocity(Vector2 velocity)
     {
-        this.friction = friction;
-    }
-    
-    /// <summary>
-    /// Define gravity for this object.
-    /// </summary>
-    /// <param name="gravity"></param>
-    public void SetGravity(Vector2 gravity)
-    {
-        this.gravityVector = gravity;
+        rb.velocity = velocity;
     }
 
-    /// <summary>
-    /// Change/add acceleration to this object. 
-    /// </summary>
-    /// <param name="toggle">Responsible for toggling acceleration.</param>
-    /// <param name="acceleration"></param>
-    public void AddAcceleration(int toggle, float acceleration)
+    public void AddForce(Vector2 force)
     {
-        accelerationVector = direction * acceleration * toggle;
-    }
+        bufferedForce = force;
 
-    /// <summary>
-    /// Add a force in terms of a velocity change to this object.
-    /// </summary>
-    /// <param name="force"></param>
-    public void Addforce(Vector2 force)
-    {
-        if (force.y != 0)
-            velocityVector.y = 0;
-
-        velocityVector += force;
+        buffer_AddForce = true;
     }
 }

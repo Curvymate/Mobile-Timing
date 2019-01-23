@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InteractableObstacle : Entity
+public class Environment : Entity
 {
 
 }

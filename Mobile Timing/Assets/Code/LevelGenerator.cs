@@ -9,8 +9,11 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] private float spacing;
     private Vector2 pos;
 
-    private InteractableObstacle spawnedPlatform;
-    private InteractableObstacle previousPlatform;
+    private SObject spawnedObject;
+    private SObject previousObject;
+
+    private Vector2 targetPosition;
+    [SerializeField] private float horizontalOffset;
 
     private void Start()
     {
@@ -19,20 +22,22 @@ public class LevelGenerator : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        targetPosition = Player.instance.Position;
+
+        if (pos.x <= targetPosition.x + horizontalOffset)
             GenerateFromRuleset();
     }
 
     private void Init()
     {
         ChangeRule(initialRule);
-        SpawnPlatform(currentRule.platform, Vector2.zero);
+        Generate(currentRule.sObject, Vector2.zero);
         ChangeRule(initialRule.link[Random.Range(0, initialRule.link.Length)]);
     }
 
     private void GenerateFromRuleset()
     {
-        InteractableObstacle currentPlatform = currentRule.platform;
+        SObject currentObject = currentRule.sObject;
         float spacingX = 0;
         float spacingY = 0;
 
@@ -42,32 +47,26 @@ public class LevelGenerator : MonoBehaviour
             spacingY = Random.Range(currentRule.spacing.min.y, currentRule.spacing.max.y);
         }
 
-        Vector2 previousPlatformSize = spawnedPlatform.GetSize();
-        Vector2 currentPlatformSize = currentPlatform.GetSize();
+        Vector2 previousPlatformSize = spawnedObject.GetSize_Half();
+        Vector2 currentPlatformSize = currentObject.GetSize_Half();
 
         pos.x += (previousPlatformSize.x + currentPlatformSize.x) + spacingX;
         pos.y += spacingY;
 
-        SpawnPlatform(currentPlatform, pos);
+        Generate(currentObject, pos);
 
         ChangeRule(currentRule.link[Random.Range(0, currentRule.link.Length)]);
     }
 
-    private void SpawnPlatform(Entity platform, Vector2 pos)
+    private void Generate(SObject _object, Vector2 pos)
     {
         this.pos = pos;
             
-        spawnedPlatform = Instantiate(platform, pos, Quaternion.identity).GetComponent<InteractableObstacle>();
+        spawnedObject = Instantiate(_object, pos, Quaternion.identity);
 
-        if (currentRule.objectType == ObjectType.HOOK)
-        {
-            Launcher previousLauncher = previousPlatform.GetComponent<Launcher>();
-            previousLauncher.ChangeProceedingHook(spawnedPlatform);
-        }
+        spawnedObject.Init(Player.instance.movement, Player.instance);
 
-        previousPlatform = spawnedPlatform;
-
-
+        previousObject = spawnedObject;
     }
 
     private void ChangeRule(Rule rule)

@@ -1,31 +1,21 @@
 ﻿using UnityEngine;
 
-public class Launcher : InteractableObstacle
+public class Launcher : SObject
 {
-    private static string targetTag = "Player";
-
     [SerializeField] private float verticalForce;
-    private Movement target;
+    private string _targetTag = "Player";
 
-    public InteractableObstacle ProceedingHook { get { return proceedingHook; } }
-    private InteractableObstacle proceedingHook;
-
-    private void Start()
+    private void Launch()
     {
-        target = Player.instance.Movement;
-    }
-
-    public void ChangeProceedingHook(InteractableObstacle hook)
-    {
-        proceedingHook = hook;
+        _targetMovement.AddForce(Vector2.up * verticalForce);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == targetTag)
+        if (other.tag.CompareTo(_targetTag) == 0)
         {
-            Player.instance.ChangeHook(proceedingHook);
-            target.Addforce(Vector2.up * verticalForce);
+            Player.instance.ChangeHook(Hook.GetClosestHook_Horizontal(position));
+            Launch();
         }
     }
 }

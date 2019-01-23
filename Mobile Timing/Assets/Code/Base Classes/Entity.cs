@@ -18,25 +18,24 @@ public class Entity : MonoBehaviour
 
     protected void Awake()
     {
-        if (sr != null)
-            sr = GetComponent<SpriteRenderer>();
+        sr = GetComponent<SpriteRenderer>();
     }
 
-    protected void EntityUpdate()
+    protected void Update()
     {
         position = transform.position;
         scale = transform.localScale;
         rotation = transform.rotation.eulerAngles;
     }
 
-    public Vector2 GetSize()
+    public Vector2 GetSize_Half()
     {
         if (sr == null)
             sr = GetComponent<SpriteRenderer>();
 
         Vector2 size;
-        size.x = sr.sprite.bounds.size.x / 2;
-        size.y = sr.sprite.bounds.size.y / 2;
+        size.x = (sr.sprite.bounds.size.x) * transform.localScale.x / 2;
+        size.y = (sr.sprite.bounds.size.y) * transform.localScale.y / 2;
 
         return size;
     }

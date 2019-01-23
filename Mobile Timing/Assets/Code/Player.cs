@@ -2,37 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : Entity
+public class Player : Entity, IColor
 {
     public static Player instance;
 
-    // Public:
-
     // Private:
-    [Header("Movement")]
-    [SerializeField] private float maxSpeed;
-    [SerializeField] private float initialSpeed;
-    [SerializeField] private Vector2 direction;
 
-    [SerializeField] private float acceleration;
-    [SerializeField] private float friction;
-    [SerializeField] private Vector2 gravity;
+    // Color Profile.
+    public Color color { get { return _color; } }
+    private Color _color;
 
-    private int accelerationSwitch = 0;
-
+    // Grappeling.
     [Header("Grappel")]
-    private InteractableObstacle currentHook;
-    [SerializeField] private float grappelAcceleration;
+    private Hook _currentHook;
+    [SerializeField] private float _grappelForce;
 
-    // References.
-    public Movement Movement { get { return movement; } }
-    private Movement movement;
+    #region References.
+    public Movement movement { get { return _movement; } }
+    private Movement _movement;
+    #endregion
 
-    private void Awake()
+    private new void Awake()
     {
         instance = this;
 
-        movement = GetComponent<Movement>();
+        _movement = GetComponent<Movement>();
     }
 
     private void Start()
@@ -40,63 +34,47 @@ public class Player : Entity
         Init();
     }
 
-    private void Update()
+    private new void Update()
     {
-        base.EntityUpdate();
-
-        if (Input.GetMouseButton(0))
-            ToggleAcceleration(1);
-        else
-            ToggleAcceleration(0);
+        base.Update();
 
         if (Input.GetKeyDown(KeyCode.Space))
             Grappel();
-
-        Accelerate();
     }
 
-    public void Init()
+    private void Init()
     {
-        movement.SetMaxSpeed(this.maxSpeed);
-        movement.SetFriction(this.friction);
-        movement.SetGravity(this.gravity);
-
-        movement.SetInitialVelocity(this.initialSpeed, this.direction);
-    }
-
-    private void Accelerate()
-    {
-        movement.AddAcceleration(accelerationSwitch, this.acceleration);
-    }
-
-    public void ToggleAcceleration(int toggle)
-    {
-        accelerationSwitch = toggle;
+        _movement.ChangeVelocity(Vector2.right * _movement.MinSpeed);
     }
 
     private void Grappel()
     {
-        if (currentHook != null)
+        if (_currentHook != null && !_movement.IsGrounded)
         {
-            //if (position.y > currentHook.Position.y || position.x > currentHook.Position.x)
-            //{
-            //    currentHook = null;
-            //    return;
-            //}
+            Vector2 hookDirection;
+            hookDirection = (_currentHook.Position - position).normalized;
 
-            Vector2 currentVelocity;
-            Vector2 force;
+            Vector2 newVelocity;
+            newVelocity.x = _movement.CurrentVelocity.x;
+            newVelocity.y = 0;
+            _movement.ChangeVelocity(newVelocity);
 
-            currentVelocity = movement.CurrentVelocity;
+            _movement.AddForce(hookDirection * _grappelForce);
 
-            force = (currentHook.Position - position).normalized;
-
-            movement.Addforce(currentVelocity + (force * grappelAcceleration * Time.fixedDeltaTime));
+            _currentHook = null;
         }
     }
 
-    public void ChangeHook(InteractableObstacle hook)
+    public void ChangeHook(Hook hook)
     {
-        currentHook = hook;
+        _currentHook = hook;
+    }
+
+    public void ChangeColor(int color)
+    {
+        if (color > System.Enum.GetValues(typeof(Color)).Length - 1)
+            color = 3;
+
+        _color = (Color)color;
     }
 }

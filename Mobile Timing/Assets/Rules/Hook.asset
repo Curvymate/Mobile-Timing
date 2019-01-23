@@ -9,15 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: f74c963037a4d444197afab3991907c3, type: 3}
   m_Name: Hook
-  m_EditorClassIdentifier: Assembly-CSharp::Rule
+  m_EditorClassIdentifier: 
   objectType: 2
-  platform: {fileID: 4978837502644466984, guid: b52d73b854c8a254da6bec61f23df8d8,
+  platform: {fileID: 8627103971989218404, guid: b52d73b854c8a254da6bec61f23df8d8,
     type: 3}
   link:
-  - {fileID: 11400000, guid: 1546e677492302c47ba6370ee9f1eb12, type: 2}
-  - {fileID: 11400000, guid: 37b47d27ac8788e4ab711cc95abad947, type: 2}
+  - {fileID: 11400000, guid: f5f747fba4e818a41b0750f16fbb0215, type: 2}
+  - {fileID: 11400000, guid: 8c1e096601e1a174eb41304276e33b7d, type: 2}
   spacing:
     min: {x: 5, y: 5}
-    max: {x: 8, y: 10}
+    max: {x: 6, y: 7}

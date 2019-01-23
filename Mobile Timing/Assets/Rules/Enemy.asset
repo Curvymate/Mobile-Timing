@@ -10,14 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f74c963037a4d444197afab3991907c3, type: 3}
-  m_Name: Normal Platform
+  m_Name: Enemy
   m_EditorClassIdentifier: 
-  objectType: 0
-  platform: {fileID: 1130166504143969234, guid: 602611b6dbd65604593ae5481173b5a9,
-    type: 3}
-  link:
-  - {fileID: 11400000, guid: 8c1e096601e1a174eb41304276e33b7d, type: 2}
-  - {fileID: 11400000}
+  objectType: 3
+  sObject: {fileID: 6388965939001421490, guid: 14e265880fa9f5748875022d967b6daa, type: 3}
+  link: []
   spacing:
-    min: {x: 4, y: -4}
-    max: {x: 6, y: 0}
+    min: {x: 0, y: 0}
+    max: {x: 0, y: 0}
